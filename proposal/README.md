@@ -1,7 +1,7 @@
 # CourseManager
 **Group 3: Griffin Davidson, Ricky Nguyen, and Karan Sharma**
 <br />
-Proposal Written by Ricky Nguyen and Karan Sharma
+Proposal Written by Griffin Davidson, Ricky Nguyen, and Karan Sharma
 <br />
 ## Problem
 The problem we are trying to solve is the issue of tracking the courses you’ve taken and those that need to be taken by a student. Often, students have trouble figuring out the next courses they need to take for the next semester. Or sometimes students take the wrong courses that cause them to fall behind in attaining their degree. So the issue here to be resolved is to provide students with a more interactive and easier platform where students can utilize our app to devise their degree plans.
