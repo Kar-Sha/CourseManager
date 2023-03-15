@@ -26,4 +26,5 @@ After the user enters their school, the user will be prompted to sign in or regi
 
 ## References
 [1] MyPlanner: https://one.sjsu.edu/task/all/myplanner
+<br />
 [2] MySJSU: https://one.sjsu.edu/
