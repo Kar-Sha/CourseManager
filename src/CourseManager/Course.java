@@ -1,28 +1,35 @@
 package CourseManager;
 
+import java.util.Random;
+
 public class Course 
 {
-	private int courseID;
+	private String courseID;
 	private String title;
 	private int creditHours;
 	private String description;
 	
+	/*
+	 * Public constructor for course with title, creditHours, and Description user-created
+	 * 
+	 * courseID is automatically and randomly generated, will eventually include checks that the random ID does not
+	 * 	conflict with a prexisting ID
+	 */
 	public Course(
-			int courseID,
 			String title,
 			int creditHours,
 			String description)
 	{
-		this.courseID = courseID;
 		this.title = title;
 		this.creditHours = creditHours;
 		this.description = description;
 		
-		// CourseID should be a 5 or 6 digit random number and checked to ensure any newly created
-		// courses do not match IDs with a existing course
+		Random rand = new Random();
+		int id = rand.nextInt(1,1000000);
+		this.courseID = String.format("%06d", id);
 	}
 	
-	public int getID()
+	public String getID()
 	{
 		return this.courseID;
 	}
