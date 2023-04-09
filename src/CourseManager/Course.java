@@ -1,6 +1,5 @@
 package CourseManager;
 
-
 public class Course
 {
     private int courseID;

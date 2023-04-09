@@ -44,7 +44,7 @@ public class CourseMap
 	 * 
 	 * @return true if sucessfully able to add course, false otherwise
 	 */
-	public boolean enroll(int courseID)
+	public boolean enroll(String courseID)
 	{
 		
 		return false;
@@ -55,9 +55,20 @@ public class CourseMap
 	 * 
 	 * @Return true if course is successfully dropped, false otherwise
 	 */
-	public boolean drop(int courseID)
+	public boolean drop(String courseID)
 	{
 		
+		
 		return false;
+	}
+	
+	public ArrayList<Course> getCurrentCourses()
+	{
+		return this.courses;
+	}
+	
+	public ArrayList<Course> getHistory()
+	{
+		return this.history;
 	}
 }

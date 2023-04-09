@@ -1,5 +1,7 @@
 package CourseManager;
 
+import java.util.Random;
+
 public class Student 
 {
 	private String firstName;
@@ -51,12 +53,38 @@ public class Student
 		return this.map.drop(course.getID());
 	}
 	
-	/*
-	 * TODO: generate ID in the following format: firstnameLastname[4randomdigits]
-	 * 	and save it to studentID, this should run upon creation of student
-	 */
-	private void generateID()
+	public String getFirstName()
 	{
+		return this.firstName;
+	}
+	
+	public String getLastName()
+	{
+		return this.lastName;
+	}
+	
+	public String getEmail()
+	{
+		return this.email;
+	}
+	
+	public String getMajor()
+	{
+		return this.major;
+	}
+	
+	public String getID()
+	{
+		return this.studentID;
+	}
+	
+	public CourseMap getMap()
+	{
+		return this.map;
+	}
+  
+	private void generateID()
+  {
 		char firstInitial = this.firstName.toUpperCase().charAt(0);
 		char lastInitial = this.lastName.toUpperCase().charAt(0);
 		String randomDigits = String.format("%04d", (int) (Math.random() * 10000));
