@@ -59,7 +59,7 @@ public class Student
 	{
 		char firstInitial = this.firstName.toUpperCase().charAt(0);
 		char lastInitial = this.lastName.toUpperCase().charAt(0);
-		int idNum = (int) Math.floor(Math.random() *(9999 - 1000 + 1) + 1000);
-		return String.format("%c%c-%d", firstInitial, lastInitial, idNum);
+		String randomDigits = String.format("%04d", (int) (Math.random() * 10000));
+		this.studentID = String.format("%s%s%s", firstInitial, lastInitial, randomDigits);
 	}
 }
