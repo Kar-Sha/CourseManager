@@ -82,19 +82,12 @@ public class Student
 	{
 		return this.map;
 	}
-	
-	/*
-	 * TODO: generate ID in the following format: firstnameLastname[4randomdigits]
-	 * 	and save it to studentID, this should run upon creation of student
-	 */
+  
 	private void generateID()
-	{
-		Random randInt = new Random();
-		int intID = randInt.nextInt(0000, 10000);
-		String stringID = String.format("%04d", intID);
-		
-		this.studentID = this.firstName.toLowerCase() + this.lastName.toLowerCase() + stringID;
+  {
+		char firstInitial = this.firstName.toUpperCase().charAt(0);
+		char lastInitial = this.lastName.toUpperCase().charAt(0);
+		String randomDigits = String.format("%04d", (int) (Math.random() * 10000));
+		this.studentID = String.format("%s%s%s", firstInitial, lastInitial, randomDigits);
 	}
-	
-	
 }
