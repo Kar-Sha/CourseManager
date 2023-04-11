@@ -8,6 +8,7 @@ import javax.swing.*;
 public class LoginPage implements ActionListener{
 	
 	JFrame frame = new JFrame();
+	JLabel label = new JLabel("Login");
 	JButton loginButton = new JButton("Login");
 	JButton signupButton = new JButton("Sign Up");
 	JTextField userIDField = new JTextField();
@@ -21,6 +22,9 @@ public class LoginPage implements ActionListener{
 		
 		logininfo = loginInfoOriginal;
 		
+		label.setBounds(160,20,200,35);
+		label.setFont(new Font(null,Font.PLAIN,25));
+
 		userIDLabel.setBounds(50,100,75,25);
 		userPasswordLabel.setBounds(50,150,75,25);
 		
@@ -38,6 +42,7 @@ public class LoginPage implements ActionListener{
 		signupButton.setFocusable(false);
 		signupButton.addActionListener(this);
 		
+		frame.add(label);
 		frame.add(userIDLabel);
 		frame.add(userPasswordLabel);
 		frame.add(messageLabel);

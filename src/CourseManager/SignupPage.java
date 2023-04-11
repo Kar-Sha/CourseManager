@@ -8,6 +8,7 @@ import javax.swing.*;
 public class SignupPage implements ActionListener{
 	//setting up the form
 	JFrame frame = new JFrame();
+	JLabel label = new JLabel("Sign Up");
 	JButton signupButton = new JButton("Sign Up");
 	JButton backButton = new JButton("Back");
 	JTextField userIDField = new JTextField();
@@ -21,6 +22,9 @@ public class SignupPage implements ActionListener{
 		
 		signup = signupInfo;
 		
+		label.setBounds(160,20,200,35);
+		label.setFont(new Font(null,Font.PLAIN,25));
+
 		userIDLabel.setBounds(50,100,75,25);
 		userPasswordLabel.setBounds(50,150,75,25);
 		
@@ -38,6 +42,7 @@ public class SignupPage implements ActionListener{
 		backButton.setFocusable(false);
 		backButton.addActionListener(this);
 		
+		frame.add(label);
 		frame.add(userIDLabel);
 		frame.add(userPasswordLabel);
 		frame.add(messageLabel);
