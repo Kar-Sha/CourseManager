@@ -7,53 +7,53 @@ import javax.swing.*;
 
 public class SignupPage implements ActionListener{
 	//setting up the form
-	JFrame frame = new JFrame();
-	JLabel label = new JLabel("Sign Up");
-	JButton signupButton = new JButton("Sign Up");
-	JButton backButton = new JButton("Back");
-	JTextField userIDField = new JTextField();
-	JPasswordField userPasswordField = new JPasswordField();
-	JLabel userIDLabel = new JLabel("userID:");
-	JLabel userPasswordLabel = new JLabel("password:");
-	JLabel messageLabel = new JLabel();
-	HashMap<String,String> signup = new HashMap<String,String>();
+	private JFrame frame = new JFrame();
+	private JLabel label = new JLabel("Sign Up");
+	private JButton signupButton = new JButton("Sign Up");
+	private JButton backButton = new JButton("Back");
+	private JTextField userIDField = new JTextField();
+	private JPasswordField userPasswordField = new JPasswordField();
+	private JLabel userIDLabel = new JLabel("userID:");
+	private JLabel userPasswordLabel = new JLabel("password:");
+	private JLabel messageLabel = new JLabel();
+	private HashMap<String,String> signup = new HashMap<String,String>();
 	
-	SignupPage(HashMap<String,String> signupInfo){
+	SignupPage(HashMap<String,String> signupInfo, int xCoord, int yCoord){
 		
-		signup = signupInfo;
+		this.signup = signupInfo;
 		
-		label.setBounds(160,20,200,35);
-		label.setFont(new Font(null,Font.PLAIN,25));
+		this.label.setBounds(160,20,200,35);
+		this.label.setFont(new Font(null,Font.PLAIN,25));
+       
+		this.userIDLabel.setBounds(50,100,75,25);
+		this.userPasswordLabel.setBounds(50,150,75,25);
+	
+		this.messageLabel.setBounds(125,250,250,35);
+		this.messageLabel.setFont(new Font(null,Font.ITALIC,25));
+		
+		this.userIDField.setBounds(125,100,200,25);
+		this.userPasswordField.setBounds(125,150,200,25);
+	
+		this.signupButton.setBounds(125,200,100,25);
+		this.signupButton.setFocusable(false);
+		this.signupButton.addActionListener(this);
+	
+		this.backButton.setBounds(225,200,100,25);
+		this.backButton.setFocusable(false);
+		this.backButton.addActionListener(this);
 
-		userIDLabel.setBounds(50,100,75,25);
-		userPasswordLabel.setBounds(50,150,75,25);
-		
-		messageLabel.setBounds(125,250,250,35);
-		messageLabel.setFont(new Font(null,Font.ITALIC,25));
-		
-		userIDField.setBounds(125,100,200,25);
-		userPasswordField.setBounds(125,150,200,25);
-		
-		signupButton.setBounds(125,200,100,25);
-		signupButton.setFocusable(false);
-		signupButton.addActionListener(this);
-		
-		backButton.setBounds(225,200,100,25);
-		backButton.setFocusable(false);
-		backButton.addActionListener(this);
-		
-		frame.add(label);
-		frame.add(userIDLabel);
-		frame.add(userPasswordLabel);
-		frame.add(messageLabel);
-		frame.add(userIDField);
-		frame.add(userPasswordField);
-		frame.add(signupButton);
-		frame.add(backButton);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(420,420);
-		frame.setLayout(null);
-		frame.setVisible(true);
+		this.frame.add(label);
+		this.frame.add(userIDLabel);
+		this.frame.add(userPasswordLabel);
+		this.frame.add(messageLabel);
+		this.frame.add(userIDField);
+		this.frame.add(userPasswordField);
+		this.frame.add(signupButton);
+		this.frame.add(backButton);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setBounds(xCoord, yCoord, Main.SIDE_SIZE, Main.SIDE_SIZE);
+		this.frame.setLayout(null);
+		this.frame.setVisible(true);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class SignupPage implements ActionListener{
 		
 		if(e.getSource()==backButton) {
             frame.dispose();
-			LoginPage login = new LoginPage(signup);
+			LoginPage login = new LoginPage(signup, frame.getX(), frame.getY());
 		}
 		
 		if(e.getSource()==signupButton) {
@@ -88,7 +88,7 @@ public class SignupPage implements ActionListener{
             	signup.put(userID, password);
             	
 			    frame.dispose();
-		        LoginPage login = new LoginPage(signup);
+		        LoginPage login = new LoginPage(signup, frame.getX(), frame.getY());
             }
             //
         }
