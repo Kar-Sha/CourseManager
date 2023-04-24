@@ -42,7 +42,7 @@ public class Student
 	 */
 	public boolean enroll(Course course)
 	{
-		return this.map.enroll(course.getID());
+		return this.map.enroll(course.getID() + "");
 	}
 	
 	/*
@@ -50,7 +50,7 @@ public class Student
 	 */
 	public boolean drop(Course course)
 	{
-		return this.map.drop(course.getID());
+		return this.map.drop(course.getID() + "");
 	}
 	
 	public String getFirstName()
