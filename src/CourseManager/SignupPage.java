@@ -5,6 +5,9 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
+import CourseManager.PasswordExceptions.*;
+
+
 public class SignupPage implements ActionListener{
 	//setting up the form
 	private JFrame frame = new JFrame();
@@ -57,39 +60,77 @@ public class SignupPage implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		
-		if(e.getSource()==backButton) {
+		if(e.getSource()==backButton) 
+		{
             frame.dispose();
 			LoginPage login = new LoginPage(signup, frame.getX(), frame.getY());
 		}
 		
-		if(e.getSource()==signupButton) {
-
+		if(e.getSource()==signupButton) 
+		{
 			
 			String userID = userIDField.getText();
 			String password = String.valueOf(userPasswordField.getPassword());
 			
-		
-			// Missing username
-            if(userID.isBlank()) {
-            	messageLabel.setForeground(Color.red);
-				messageLabel.setText("input a username");
-            }
-            
-            // Missing Password ( should do password verification )
-            else if(password.isBlank()) {
-            	messageLabel.setForeground(Color.red);
-			    messageLabel.setText("input a password");
-            }
-            
+			try 
+			{
+				new PasswordValidation(userPasswordField.getPassword());
+			} 
+			catch (LowerCaseCharacterMissing e1) 
+			{
+				messageLabel.setForeground(Color.red);
+			    messageLabel.setText("Password must have at least 1 lower-case character");
+				return;
+			}
+			catch (UpperCaseCharacterMissing e1) 
+			{
+				messageLabel.setForeground(Color.red);
+			    messageLabel.setText("Password must have at least 1 upper-case character");
+				return;
+			}
+			catch (NumberCharacterMissing e1) 
+			{
+				messageLabel.setForeground(Color.red);
+			    messageLabel.setText("Password must have at least 1 numerical character");
+				return;
+			}
+			catch (SpecialCharacterMissing e1) 
+			{
+				messageLabel.setForeground(Color.red);
+			    messageLabel.setText("Password must have at least 1 special character");
+				return;
+			}
+			catch (Minimum8CharactersMissing e1) 
+			{
+				messageLabel.setForeground(Color.red);
+			    messageLabel.setText("Password must be at least 8 characters");
+				return;
+			}
+			catch (PasswordException e1) 
+			{
+				messageLabel.setForeground(Color.red);
+			    messageLabel.setText("Something went wrong");
+				return;
+			}
+			finally
+			{
+				if(userID.isBlank()) 
+				{
+	            	messageLabel.setForeground(Color.red);
+					messageLabel.setText("input a username");
+					return;
+	            }
+			}
+			
             // All good
-            else {  	
-            	signup.put(userID, password);
-            	
-			    frame.dispose();
-		        LoginPage login = new LoginPage(signup, frame.getX(), frame.getY());
-            }
+        	signup.put(userID, password);
+        	
+		    frame.dispose();
+	        new LoginPage(signup, frame.getX(), frame.getY());
+            
             //
         }
            
