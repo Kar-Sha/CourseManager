@@ -65,25 +65,32 @@ public class SignupPage implements ActionListener{
 		}
 		
 		if(e.getSource()==signupButton) {
+
 			
 			String userID = userIDField.getText();
 			String password = String.valueOf(userPasswordField.getPassword());
-
-            if(signup.containsKey(userID)) {
-                if(signup.containsKey(password)){
-                    frame.dispose();
-			        LoginPage login = new LoginPage(signup);
-                }
-                else{
-                    messageLabel.setForeground(Color.red);
-				    messageLabel.setText("input a password");
-                }
-            }
-
-            else {
-				messageLabel.setForeground(Color.red);
+			
+		
+			// Missing username
+            if(userID.isBlank()) {
+            	messageLabel.setForeground(Color.red);
 				messageLabel.setText("input a username");
-			}
+            }
+            
+            // Missing Password ( should do password verification )
+            else if(password.isBlank()) {
+            	messageLabel.setForeground(Color.red);
+			    messageLabel.setText("input a password");
+            }
+            
+            // All good
+            else {  	
+            	signup.put(userID, password);
+            	
+			    frame.dispose();
+		        LoginPage login = new LoginPage(signup);
+            }
+            //
         }
            
 	}	
