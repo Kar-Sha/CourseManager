@@ -11,10 +11,12 @@ import javax.swing.BorderFactory;
 public class WelcomePage extends JFrame implements ActionListener {
 	private String userID;
 
-	public WelcomePage(String userID) {
+	public WelcomePage(String userID, int xCoord, int yCoord) {
+		
 		this.userID = userID;
+		
 		setTitle("Welcome Back " + userID);
-		setSize(400, 600);
+		setBounds(xCoord, yCoord, 400, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel(null);
@@ -65,7 +67,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 			JButton button = (JButton) e.getSource();
 			if (button.getText().equals("Log Out")) {
 				dispose();
-				new LoginPage(new HashMap<>());
+				new LoginPage(new HashMap<>(), this.getX(), this.getY());
 			}
 		}
 	}
