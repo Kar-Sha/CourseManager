@@ -2,6 +2,11 @@ package CourseManager;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import javax.swing.*;
 
@@ -59,19 +64,37 @@ public class LoginPage implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		//redirects to signup page
 		if(e.getSource()==signupButton) {
-			//userIDField.setText("");
-			//userPasswordField.setText("");
             frame.dispose();
-            SignupPage signup = new SignupPage(logininfo, frame.getX(), frame.getY());
+            new SignupPage(logininfo, frame.getX(), frame.getY());
 		}
-		
+		//login validation, checks if user is within the database
 		if(e.getSource()==loginButton) {
 			
 			String userID = userIDField.getText();
 			String password = String.valueOf(userPasswordField.getPassword());
-			
+
+			try {
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+
+				PreparedStatement pst = con.prepareStatement("SELECT student_ID, password FROM student WHERE student_id=? and password=?");
+				pst.setString(1, userID);
+				pst.setString(2, password);
+				ResultSet rs = pst.executeQuery();
+				if(rs.next()){
+					frame.dispose();
+					new WelcomePage(userID, frame.getX(), frame.getY());
+				}
+				else{
+					JOptionPane.showMessageDialog(signupButton, "Incorrect Credentials");
+				}
+			}
+			catch (SQLException sqlException){
+				sqlException.printStackTrace();
+			}
+
+			/* 
 			if(!logininfo.containsKey(userID)) {
 				messageLabel.setForeground(Color.red);
 				messageLabel.setText("username not found");
@@ -88,6 +111,7 @@ public class LoginPage implements ActionListener{
 				frame.dispose();
 				WelcomePage welcomePage = new WelcomePage(userID, frame.getX(), frame.getY());
 			}
+			*/
 			
 		}
 	}	
