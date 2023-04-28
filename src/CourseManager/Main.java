@@ -6,6 +6,6 @@ public class Main {
 	
     public static void main(String[] args) {
         new LoginPage(null, SIDE_SIZE, SIDE_SIZE);
-        //DBConnection.loadConnection(); DO NOT DELETE FOR NOW, THIS LINE IS USED TO TEST YOUR DATABASE CONNECTION 
+        DBConnection.loadConnection(); //DO NOT DELETE FOR NOW, THIS LINE IS USED TO TEST YOUR DATABASE CONNECTION
     }
 }

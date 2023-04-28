@@ -12,7 +12,7 @@ public class DBConnection {
     public static void loadConnection(){
         String url = "jdbc:mysql://localhost:3306/course_manager";
         String root = "root";
-        String pass = "MySQLr00tpass"; //change
+        String pass = "Bellators@612"; //change
 
 
         try{

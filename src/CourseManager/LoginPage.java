@@ -39,11 +39,11 @@ public class LoginPage implements ActionListener{
 		this.userIDField.setBounds(125,100,200,25);
 		this.userPasswordField.setBounds(125,150,200,25);
 		
-		this.loginButton.setBounds(125,200,100,25);
+		this.loginButton.setBounds(225,200,100,25);
 		this.loginButton.setFocusable(false);
 		this.loginButton.addActionListener(this);
 		
-		this.signupButton.setBounds(225,200,100,25);
+		this.signupButton.setBounds(125,200,100,25);
 		this.signupButton.setFocusable(false);
 		this.signupButton.addActionListener(this);
 		
@@ -76,7 +76,7 @@ public class LoginPage implements ActionListener{
 			String password = String.valueOf(userPasswordField.getPassword());
 
 			try {
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
 
 				PreparedStatement pst = con.prepareStatement("SELECT student_ID, password FROM student WHERE student_id=? and password=?");
 				pst.setString(1, userID);
