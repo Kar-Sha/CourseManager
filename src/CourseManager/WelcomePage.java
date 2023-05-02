@@ -9,27 +9,39 @@ import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 
 public class WelcomePage extends JFrame implements ActionListener {
-    public JFrame frame;
+    private String userID;
 
-    public WelcomePage() {
+    public WelcomePage(String userID, int xCoord, int yCoord) {
 
-        setTitle("Welcome Back!");
-        setBounds(0, 0, 400, 600);
+        this.userID = userID;
+
+        setTitle("Welcome Back " + userID);
+        setBounds(xCoord, yCoord, 400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(null);
         add(panel);
 
-        String[] options = {"Schedule", "Student Profile", "Course History", "CourseMap", "Add/Drop Courses"};
+        String[] options = {"Schedule", "Student Profile", "Course History", "CourseMap"};
         JComboBox<String> dropdown = new JComboBox<>(options);
         panel.add(dropdown);
         dropdown.setBounds(50, 0, 300, 50);
         dropdown.addActionListener(this);
 
+        JButton addCourseButton = new JButton("Add Course");
+        addCourseButton.addActionListener(this);
+        panel.add(addCourseButton);
+        addCourseButton.setBounds(50, 500, 150, 30);
+
+        JButton dropCourseButton = new JButton("Drop Course");
+        addCourseButton.addActionListener(this);
+        panel.add(dropCourseButton);
+        dropCourseButton.setBounds(200, 500, 150, 30);
+
         JButton logoutButton = new JButton("Log Out");
         logoutButton.addActionListener(this);
         panel.add(logoutButton);
-        logoutButton.setBounds(50, 510, 300, 30);
+        logoutButton.setBounds(50, 540, 300, 30);
 
         JLabel scheduleLabel = new JLabel("Class Schedule:");
         scheduleLabel.setBounds(30, 45, 300, 30);
@@ -67,32 +79,33 @@ public class WelcomePage extends JFrame implements ActionListener {
             String selectedOption = (String) dropdown.getSelectedItem();
             if (selectedOption.equals("CourseMap")) {
                 JFrame courseMapFrame = new JFrame("Course Map");
-                courseMapFrame.setSize(400, 600);
+                courseMapFrame.setSize(500, 500);
+                courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 courseMapFrame.setVisible(true);
             }
             if (selectedOption.equals("Student Profile")) {
-                JFrame studentProfileFrame = new StudentProfile().frame;
-                studentProfileFrame.setVisible(true);
-                dispose();
+                JFrame courseMapFrame = new JFrame("Student Profile");
+                courseMapFrame.setSize(500, 500);
+                courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                courseMapFrame.setVisible(true);
             }
             if (selectedOption.equals("Course History")) {
-                JFrame courseHistoryFrame = new CourseHistory().frame;
-                courseHistoryFrame.setVisible(true);
-                dispose();
+                JFrame courseMapFrame = new JFrame("Course History");
+                courseMapFrame.setSize(500, 500);
+                courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                courseMapFrame.setVisible(true);
             }
-            if (selectedOption.equals("Add/Drop Courses")) {
-                JFrame AdjustCoursePageFrame = new AdjustCoursePage().frame;
-                AdjustCoursePageFrame.setVisible(true);
-                dispose();
-            }
-        }
-        if (e.getSource() instanceof JComboBox) {
+
+        } if (e.getSource() instanceof JComboBox) {
             // code for handling the JComboBox selection
         } else if (e.getSource() instanceof JButton) {
             JButton button = (JButton) e.getSource();
             if (button.getText().equals("Log Out")) {
                 dispose();
                 new LoginPage(new HashMap<>(), this.getX(), this.getY());
+            } else if (button.getText().equals("Add Course") || button.getText().equals("Drop Course")) {
+                dispose(); // dispose the WelcomePage
+                new CoursePage(); // create and show the CoursePage
             }
         }
     }

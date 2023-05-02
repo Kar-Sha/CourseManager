@@ -1,28 +1,22 @@
 package CourseManager;
 
 import javax.swing.*;
-public class CourseMap {
-    public JFrame frame;
-    public JComboBox<String> dropdown;
 
-    CourseMap(){
-        frame = new JFrame("Course Map");
+public class CourseMap {
+    public static void main(String[] args) {
+        // Create a JFrame with title "courseMap"
+        JFrame frame = new JFrame("courseMap");
 
         // Set the size of the frame
-        frame.setSize(400, 600);
+        frame.setSize(500, 500);
 
         // Set the default close operation
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        // Create a dropdown menu
-        String[] options = {"CourseMap", "Schedule","Course History", "Student Profile","Add/Drop Courses"};
-        dropdown = new JComboBox<String>(options);
-        dropdown.setBounds(50, 0, 300, 50);
-        frame.add(dropdown);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Make the frame visible
-        frame.setLayout(null);
         frame.setVisible(true);
     }
+
+
 }
 
