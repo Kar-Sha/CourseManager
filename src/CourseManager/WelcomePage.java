@@ -9,20 +9,17 @@ import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 
 public class WelcomePage extends JFrame implements ActionListener {
-    private String userID;
+    public JFrame frame;
 
-    public WelcomePage(String userID, int xCoord, int yCoord) {
-
-        this.userID = userID;
-
-        setTitle("Welcome Back " + userID);
-        setBounds(xCoord, yCoord, 400, 600);
+    public WelcomePage() {
+        setTitle("Welcome Back");
+        setBounds(0,0, 400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(null);
         add(panel);
 
-        String[] options = {"Schedule", "Student Profile", "Course History", "CourseMap"};
+        String[] options = {"Schedule", "Student Profile", "Course History", "CourseMap","Add/Drop Courses"};
         JComboBox<String> dropdown = new JComboBox<>(options);
         panel.add(dropdown);
         dropdown.setBounds(50, 0, 300, 50);
@@ -95,6 +92,12 @@ public class WelcomePage extends JFrame implements ActionListener {
                 courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 courseMapFrame.setVisible(true);
             }
+            if (selectedOption.equals("Add/Drop Courses")) {
+                JFrame AdjustCourseFrame = new JFrame("Add/Drop Courses");
+                AdjustCourseFrame.setSize(500, 500);
+                AdjustCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                AdjustCourseFrame.setVisible(true);
+            }
 
         } if (e.getSource() instanceof JComboBox) {
             // code for handling the JComboBox selection
@@ -105,8 +108,9 @@ public class WelcomePage extends JFrame implements ActionListener {
                 new LoginPage(new HashMap<>(), this.getX(), this.getY());
             } else if (button.getText().equals("Add Course") || button.getText().equals("Drop Course")) {
                 dispose(); // dispose the WelcomePage
-                new CoursePage(); // create and show the CoursePage
+                new AdjustCoursePage(); // create and show the CoursePage
             }
         }
     }
 }
+
