@@ -12,33 +12,24 @@ public class WelcomePage extends JFrame implements ActionListener {
     public JFrame frame;
 
     public WelcomePage() {
-        setTitle("Welcome Back");
-        setBounds(0,0, 400, 600);
+
+        setTitle("Welcome Back!");
+        setBounds(0, 0, 400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(null);
         add(panel);
 
-        String[] options = {"Schedule", "Student Profile", "Course History", "CourseMap","Add/Drop Courses"};
+        String[] options = {"Schedule", "Student Profile", "Course History", "CourseMap", "Add/Drop Courses"};
         JComboBox<String> dropdown = new JComboBox<>(options);
         panel.add(dropdown);
         dropdown.setBounds(50, 0, 300, 50);
         dropdown.addActionListener(this);
 
-        JButton addCourseButton = new JButton("Add Course");
-        addCourseButton.addActionListener(this);
-        panel.add(addCourseButton);
-        addCourseButton.setBounds(50, 500, 150, 30);
-
-        JButton dropCourseButton = new JButton("Drop Course");
-        addCourseButton.addActionListener(this);
-        panel.add(dropCourseButton);
-        dropCourseButton.setBounds(200, 500, 150, 30);
-
         JButton logoutButton = new JButton("Log Out");
         logoutButton.addActionListener(this);
         panel.add(logoutButton);
-        logoutButton.setBounds(50, 540, 300, 30);
+        logoutButton.setBounds(50, 510, 300, 30);
 
         JLabel scheduleLabel = new JLabel("Class Schedule:");
         scheduleLabel.setBounds(30, 45, 300, 30);
@@ -77,40 +68,29 @@ public class WelcomePage extends JFrame implements ActionListener {
             if (selectedOption.equals("CourseMap")) {
                 JFrame courseMapFrame = new JFrame("Course Map");
                 courseMapFrame.setSize(500, 500);
-                courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 courseMapFrame.setVisible(true);
             }
             if (selectedOption.equals("Student Profile")) {
-                JFrame courseMapFrame = new JFrame("Student Profile");
-                courseMapFrame.setSize(500, 500);
-                courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                courseMapFrame.setVisible(true);
+                JFrame studentProfileFrame = new StudentProfile().frame;
+                studentProfileFrame.setVisible(true);
+                dispose();
             }
             if (selectedOption.equals("Course History")) {
-                JFrame courseMapFrame = new JFrame("Course History");
-                courseMapFrame.setSize(500, 500);
-                courseMapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                courseMapFrame.setVisible(true);
+                JFrame courseHistoryFrame = new CourseHistory().frame;
+                courseHistoryFrame.setVisible(true);
+                dispose();
             }
             if (selectedOption.equals("Add/Drop Courses")) {
-                JFrame AdjustCourseFrame = new JFrame("Add/Drop Courses");
-                AdjustCourseFrame.setSize(500, 500);
-                AdjustCourseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                AdjustCourseFrame.setVisible(true);
-            }
-
-        } if (e.getSource() instanceof JComboBox) {
-            // code for handling the JComboBox selection
-        } else if (e.getSource() instanceof JButton) {
-            JButton button = (JButton) e.getSource();
-            if (button.getText().equals("Log Out")) {
+                JFrame AdjustCoursePageFrame = new AdjustCoursePage().frame;
+                AdjustCoursePageFrame.setVisible(true);
                 dispose();
-                new LoginPage(new HashMap<>(), this.getX(), this.getY());
-            } else if (button.getText().equals("Add Course") || button.getText().equals("Drop Course")) {
-                dispose(); // dispose the WelcomePage
-                new AdjustCoursePage(); // create and show the CoursePage
+            } else if (e.getSource() instanceof JButton) {
+                JButton button = (JButton) e.getSource();
+                if (button.getText().equals("Log Out")) {
+                    dispose();
+                    new LoginPage(new HashMap<>(), this.getX(), this.getY());
+                }
             }
         }
     }
 }
-

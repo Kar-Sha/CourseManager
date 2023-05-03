@@ -1,22 +1,20 @@
 package CourseManager;
 
 import javax.swing.*;
-
 public class CourseMap {
-    public static void main(String[] args) {
-        // Create a JFrame with title "courseMap"
-        JFrame frame = new JFrame("courseMap");
+    public JFrame frame;
 
-        // Set the size of the frame
-        frame.setSize(500, 500);
+    CourseMap(){
+        frame = new JFrame("Course Map");
+
+        frame.setSize(400, 600);
 
         // Set the default close operation
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Make the frame visible
+        frame.setLayout(null);
         frame.setVisible(true);
     }
-
-
 }
 
