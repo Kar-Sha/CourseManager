@@ -57,7 +57,7 @@ In our program our classes first get the users year and major. After we get that
 3.Welcome Page <br />
 ![image](https://user-images.githubusercontent.com/83847310/236342617-ff8b789d-10b7-42c3-b2be-ea2c96385b81.png)
 4.Student Profile <br />
-![image](https://user-images.githubusercontent.com/83847310/236342723-3c369688-3bd3-4d4f-8254-a3ca85738b51.png)
+![image](https://user-images.githubusercontent.com/83847310/236344025-b9e54482-d4f9-4686-9568-a64385c2c60f.png)
 5.Course History <br />
 ![image](https://user-images.githubusercontent.com/83847310/236343651-c7e16b04-9ff2-45d8-8aec-d33c9b9ba1e0.png)
 6.Course Map <br />
