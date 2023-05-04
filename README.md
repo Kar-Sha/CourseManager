@@ -22,6 +22,18 @@ The assumption is that the user is intending to enroll into college and complete
 - JDBC
 - MySQL Community Server 8.33
 
+### Intended Usage
+This course management system is used by schools to take student records digitally. This application would be a great implementation for schools since MySQL database would be able to store any necessary data along with their academic history. This will allow schools and other similar organizations to be able to keep track for those on academic probation, helping students with disabilities, and for considering students or clubs for grants. 
+
+### Diagrams
+| Diagram  | Summary |
+| ------------- | ------------- |
+| [Class Diagram](https://github.com/griffindavidson/CourseManager/blob/main/diagrams/ClassDiagram_CourseManager.png?raw=true)  | This diagram shows the UML Diagrams for the classes that will be in our project. Student as the user, Authenticate for authenticating the user, Course with the Course Data, and Course Map displaying the course schedule.  |
+| [Sequence Diagram](https://github.com/Kar-Sha/CourseManager/blob/main/diagrams/SequenceDiagram_CourseManager.pdf)  | This diagram showcases the process on how the application will work and how different features communicate with one another.  |
+| [State Diagram](https://github.com/Kar-Sha/CourseManager/blob/main/diagrams/StateDiagram_CourseManager.pdf)  | This diagram shows the possible states that the application can be. |
+| [Use Case Diagram](https://github.com/Kar-Sha/CourseManager/blob/main/diagrams/Use_Case_Diagram.jpg)  | This diagram shows the possible use cases that the user may face. |
+
+
 ## High Level Solution and Functionality
 After the user enters their school, the user will be prompted to sign in or register. When registering the user would provide the necessary information such as name, student ID, birthdate, home location, grade, major, and GPA. After that the app will then help devise a four year plan that ensures the student can graduate on time. As the user completes their courses, the app will recommend courses to be taken for their next semester depending on their intended units and if they want to take a winter, summer, or gap semester. This allows for our app to prevent the need to go to a counselor or a major advisor for suggestions of future courses which can take a long time to hear a response from. On another page of the app we can have a chart that keeps track of the units taken to units needed for graduation such as a pie chart so it’s visually appealing to the student and easy to comprehend.
 
@@ -52,20 +64,28 @@ In our program our classes first get the users year and major. After we get that
 ### Snapshots of Running Program
 1.Login Page <br />
 ![image](https://user-images.githubusercontent.com/83847310/236339672-1f5d823b-7858-4d55-ab55-d39f825842e0.png)
+<br />
 2.Sign Up Page <br />
 ![image](https://user-images.githubusercontent.com/83847310/236342486-e4eebd98-5a6c-4502-852c-c1f4c03fb68a.png)
+<br />
 3.Welcome Page <br />
 ![image](https://user-images.githubusercontent.com/83847310/236342617-ff8b789d-10b7-42c3-b2be-ea2c96385b81.png)
+<br />
 4.Student Profile <br />
 ![image](https://user-images.githubusercontent.com/83847310/236344025-b9e54482-d4f9-4686-9568-a64385c2c60f.png)
+<br />
 5.Course History <br />
 ![image](https://user-images.githubusercontent.com/83847310/236343651-c7e16b04-9ff2-45d8-8aec-d33c9b9ba1e0.png)
+<br />
 6.Course Map <br />
 ![image](https://user-images.githubusercontent.com/83847310/236343760-f4579e50-bbd8-4dc2-a5e6-ae4534ee43bd.png)
+<br />
 7. Add/Drop Page <br />
 8. ![image](https://user-images.githubusercontent.com/83847310/236343938-7c9e4cc1-92fc-45d6-b086-bf59b434cd7e.png)
+<br />
 9. Edit Course  <br />
 ![image](https://user-images.githubusercontent.com/83847310/236343853-37220646-d22c-4264-ad8a-8abd6f00f693.png)
+<br />
 
 
 
