@@ -243,9 +243,6 @@ public class CourseMap extends JFrame implements ActionListener{
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
-                        int columns = rs.getMetaData().getColumnCount();
-                        System.out.println("col:" + columns);
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {
@@ -287,9 +284,6 @@ public class CourseMap extends JFrame implements ActionListener{
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
-                        int columns = rs.getMetaData().getColumnCount();
-                        System.out.println("col:" + columns);
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {
@@ -330,9 +324,6 @@ public class CourseMap extends JFrame implements ActionListener{
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
-                        int columns = rs.getMetaData().getColumnCount();
-                        System.out.println("col:" + columns);
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {

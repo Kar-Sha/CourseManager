@@ -19,7 +19,7 @@ public class StudentProfile extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
 
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM student WHERE student_id=?");
             pst.setString(1, user_id);
