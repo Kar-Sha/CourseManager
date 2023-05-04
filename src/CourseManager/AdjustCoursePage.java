@@ -13,24 +13,41 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
     private String user_id;
     public JList<String> courseList;
     public JComboBox<String> dropdown;
+    public WelcomePage welcomePage;
+    private JTextField classTextField = new JTextField();
 
     AdjustCoursePage(String user_id) {
         this.user_id = user_id;
+        this.welcomePage = new WelcomePage(user_id);
         frame = new JFrame("Add/Drop Course Page");
         frame.setSize(400, 600);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel(null);
 
+        //Textfield for courses
+        classTextField.setBounds(50, 400, 300, 50); // Set the bounds of the text field
+        frame.add(classTextField); // Add the text field to the frame
+
+        JLabel enterCoursesLabel = new JLabel("Enter Courses:");
+        enterCoursesLabel.setBounds(50, 370, 300, 30);
+        panel.add(enterCoursesLabel);
+
+        // Create a dropdown menu
+        String[] options = {"Add/Drop Courses","Student Profile", "Schedule", "Course History", "CourseMap"};
+        dropdown = new JComboBox<String>(options);
+        dropdown.setBounds(50, 0, 300, 50);
+        frame.add(dropdown);
+
         // Label for the course list
         JLabel courseListLabel = new JLabel("Available Courses:");
-        courseListLabel.setBounds(50, 10, 300, 30);
+        courseListLabel.setBounds(50, 40, 300, 30);
         panel.add(courseListLabel);
 
         // List for the courses
         courseList = new JList<>();
         JScrollPane courseListScrollPane = new JScrollPane(courseList);
-        courseListScrollPane.setBounds(50, 50, 300, 400);
+        courseListScrollPane.setBounds(50, 70, 300, 300);
         panel.add(courseListScrollPane);
 
         JButton addCourseButton = new JButton("Add Course");
@@ -43,9 +60,8 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         dropCourseButton.setBounds(200, 475, 150, 30);
         panel.add(dropCourseButton);
 
-
         panel.setLayout(null);
-        frame.add(panel);
+        dropdown.addActionListener(this);
 
         // Get the course options based on the user's year and major
         List<String> courseOptions = getCourseOptionsBasedOnYearAndMajor(getUserYear(), getUserMajor());
@@ -69,6 +85,36 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
                 }
             }
         });
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof JComboBox) {
+            JComboBox dropdown = (JComboBox) e.getSource();
+            String selectedOption = (String) dropdown.getSelectedItem();
+            assert selectedOption != null;
+            if (selectedOption.equals("CourseMap")) {
+                new CourseMap(user_id);
+                return;
+            }
+            if (selectedOption.equals("Schedule")) {
+                JFrame welcomePageFrame = new WelcomePage(user_id).frame;
+                frame.dispose();
+                welcomePageFrame.setVisible(true);
+            }
+
+            if (selectedOption.equals("Student Profile")) {
+                JFrame StudentProfileFrame = new StudentProfile(user_id).frame;
+                frame.dispose();
+                StudentProfileFrame.setVisible(true);
+            }
+            if (selectedOption.equals("Course History")) {
+                JFrame courseHistoryFrame = new CourseHistory(user_id).frame;
+                frame.dispose();
+                courseHistoryFrame.setVisible(true);
+
+            }
+
+        }
     }
 
     private String getUserYear() {
@@ -148,34 +194,5 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         return uniqueCourses;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JComboBox) {
-            JComboBox dropdown = (JComboBox) e.getSource();
-            String selectedOption = (String) dropdown.getSelectedItem();
-            assert selectedOption != null;
-            if (selectedOption.equals("CourseMap")) {
-                JFrame courseMapFrame = new JFrame("Course Map");
-                courseMapFrame.setSize(500, 500);
-                courseMapFrame.setVisible(true);
-                return;
-            }
-            if (selectedOption.equals("Schedule")) {
-                JFrame welcomePageFrame = new WelcomePage(user_id).frame;
-                frame.dispose();
-                welcomePageFrame.setVisible(true);
-            }
-            if (selectedOption.equals("Course History")) {
-                JFrame courseHistoryFrame = new CourseHistory(user_id).frame;
-                courseHistoryFrame.setVisible(true);
-                frame.dispose();
-            }
-            if (selectedOption.equals("Student Profile")) {
-                JFrame StudentProfileFrame = new StudentProfile(user_id).frame;
-                StudentProfileFrame.setVisible(true);
-                frame.dispose();
-            }
 
-        }
-    }
 }
