@@ -80,7 +80,8 @@ public class CourseMap extends JFrame implements ActionListener{
                 {
                     try {
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=1 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4) ORDER BY rand() LIMIT 8;",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=1 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
+                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
@@ -120,7 +121,8 @@ public class CourseMap extends JFrame implements ActionListener{
                 {
                     try {
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=2 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4) ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=2 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
+                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
@@ -163,7 +165,8 @@ public class CourseMap extends JFrame implements ActionListener{
                 {
                     try {
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=3 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4) ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=3 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
+                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
@@ -205,7 +208,8 @@ public class CourseMap extends JFrame implements ActionListener{
                 {
                     try {
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=4 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4) ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=4 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
+                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();

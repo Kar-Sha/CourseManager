@@ -20,7 +20,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
 
     AdjustCoursePage(String user_id) {
         this.user_id = user_id;
-        this.welcomePage = new WelcomePage(user_id);
+        //this.welcomePage = new WelcomePage(user_id);
         frame = new JFrame("Add/Drop Course Page");
         frame.setSize(400, 600);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -123,10 +123,9 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
 				ResultSet rs = pst.executeQuery();
 				if(rs.next()){
                     String courseID = rs.getString(1);
-                    String status = "Active";
                     Statement pst2 = con.createStatement();
-                    String sql = "INSERT INTO student_course(student_id, course_id,status)" +
-                            "VALUES('" + user_id + "','" + courseID + "','" + status + "')";
+                    String sql = "INSERT INTO student_course(student_id, course_id)" +
+                            "VALUES('" + user_id + "','" + courseID + "')";
                     int rs2 = pst2.executeUpdate(sql);
                     if(rs2 == 1)
                     {
@@ -150,13 +149,18 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
 				ResultSet rs = pst.executeQuery();
 				if(rs.next()){
                     String courseID = rs.getString(1);
-                    String status = "Active";
                     Statement pst2 = con.createStatement();
-                    String sql = "DELETE FROM student_course WHERE status='Active' and course_id=\"" + courseID + "\"";
+                    String sql = "DELETE FROM student_course WHERE status='Incomplete' and course_id=\"" + courseID + "\"";
                     int rs2 = pst2.executeUpdate(sql);
                     if(rs2 == 1)
                     {
                         JOptionPane.showMessageDialog(addCourseButton, "Deleted from Schedule");
+                        frame.dispose();
+                        con.close();
+                        new AdjustCoursePage(user_id);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(addCourseButton, "Cannot Drop Course");
                         frame.dispose();
                         con.close();
                         new AdjustCoursePage(user_id);
