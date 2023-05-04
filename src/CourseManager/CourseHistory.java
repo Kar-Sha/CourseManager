@@ -20,6 +20,12 @@ public class CourseHistory extends JFrame implements ActionListener {
         this.userID = userID;
         frame = new JFrame("Course History");
 
+        JLabel courseListLabel = new JLabel("Course History:");
+        courseListLabel.setForeground(Color.BLUE);
+        courseListLabel.setFont(new Font(null, Font.BOLD, 20));
+        courseListLabel.setBounds(115, 100, 300, 30);
+        frame.add(courseListLabel);
+
         frame.setSize(400, 600);
 
         // Set the default close operation
@@ -36,20 +42,6 @@ public class CourseHistory extends JFrame implements ActionListener {
         dropdownYear.setBounds(50, 500, 300, 50);
         frame.add(dropdownYear);
 
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-            PreparedStatement pst = con.prepareStatement("Select year_id FROM student WHERE student_id =\"" + userID + "\"");
-            ResultSet rs = pst.executeQuery();
-            if(rs.next())
-            {
-                rs.getString(1);
-                System.out.println(rs.getString(1));
-            }
-
-        }
-        catch (SQLException sqlException){
-            sqlException.printStackTrace();
-        }
         // Make the frame visible
         frame.setLayout(null);
         frame.setVisible(true);
@@ -90,13 +82,12 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Freshman"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=1 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {
@@ -126,13 +117,12 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Sophomore"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=2 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {
@@ -162,13 +152,12 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Junior"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=3 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {
@@ -198,30 +187,12 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Senior"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=4 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
                         int rows = rs.getRow();
                         rs.beforeFirst();
-                        System.out.println("rows:" + rows);
-                        /* 
-                        Random rand = new Random();
-                        int grade;
-                        grade = rand.nextInt(3); 
-                        if(grade==0)
-                        {
-                            System.err.println("0");
-                        }
-                        if(grade==1)
-                        {
-                            System.err.println("1");
-                        }
-                        if(grade==2)
-                        {
-                            System.err.println("2");
-                        }
-                        */
                         data = new Object[rows][column.length];
                         for(int i=0;i<rows;i++)
                         {

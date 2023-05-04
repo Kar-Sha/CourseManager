@@ -8,10 +8,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-
-import CourseManager.PasswordExceptions.*;
-
 
 public class SignupPage implements ActionListener{
 	//setting up the form
@@ -35,14 +31,14 @@ public class SignupPage implements ActionListener{
 	private JLabel userPasswordLabel = new JLabel("Password:");
 	private JLabel messageLabel = new JLabel();
 	private HashMap<String,String> signup = new HashMap<String,String>();
-	
+
 	SignupPage(HashMap<String,String> signupInfo, int xCoord, int yCoord){
 		//setting up fonts and bounds for all components
 		this.signup = signupInfo;
-		
+
 		this.label.setBounds(160,20,200,35);
 		this.label.setFont(new Font(null,Font.PLAIN,25));
-       
+
 		this.studentIDLabel.setBounds(50,80,75,25);
 		this.firstNameLabel.setBounds(50,110,75,25);
 		this.lastNameLabel.setBounds(50,140,75,25);
@@ -50,10 +46,10 @@ public class SignupPage implements ActionListener{
 		this.majorLabel.setBounds(50,200,75,25);
 		this.userPasswordLabel.setBounds(50,260,75,25);
 		this.yearLabel.setBounds(50,230,75,25);
-	
+
 		this.messageLabel.setBounds(50,350,250,35);
 		this.messageLabel.setFont(new Font(null,Font.ITALIC,25));
-		
+
 		this.studentIDField.setBounds(125,80,200,25);
 		this.firstNameField.setBounds(125,110,200,25);
 		this.lastNameField.setBounds(125,140,200,25);
@@ -61,11 +57,11 @@ public class SignupPage implements ActionListener{
 		this.majorField.setBounds(125,200,200,25);
 		this.userPasswordField.setBounds(125,260,200,25);
 		this.yearField.setBounds(125, 230, 200, 25);
-	
+
 		this.signupButton.setBounds(125,300,100,25);
 		this.signupButton.setFocusable(false);
 		this.signupButton.addActionListener(this);
-	
+
 		this.backButton.setBounds(225,300,100,25);
 		this.backButton.setFocusable(false);
 		this.backButton.addActionListener(this);
@@ -96,19 +92,19 @@ public class SignupPage implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
 		//back button redirects back to login page
-		if(e.getSource()==backButton) 
+		if(e.getSource()==backButton)
 		{
-            frame.dispose();
+			frame.dispose();
 			new LoginPage(signup, frame.getX(), frame.getY());
 		}
-		
+
 		//signup adds student to database + redirected back to login
-		if(e.getSource()==signupButton) 
+		if(e.getSource()==signupButton)
 		{
-			
+
 			String studentID = studentIDField.getText();
 			String firstName = firstNameField.getText();
 			String lastName = lastNameField.getText();
@@ -116,12 +112,12 @@ public class SignupPage implements ActionListener{
 			String password = String.valueOf(userPasswordField.getPassword());
 			String major = majorField.getText();
 			String year = yearField.getText(); //only put in 1 or 2 or 3 or 4
-			
+
 			try {
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
 
-				String query = "INSERT INTO student(student_id, first_name, last_name, email, password, major, year_id)" + 
-				"VALUES('" + studentID + "','" + firstName + "','" + lastName + "','"  + email + "','" + password + "','" + major + "','" + year + "')";
+				String query = "INSERT INTO student(student_id, first_name, last_name, email, password, major, year_id)" +
+						"VALUES('" + studentID + "','" + firstName + "','" + lastName + "','"  + email + "','" + password + "','" + major + "','" + year + "')";
 
 				Statement st = con.createStatement();
 				int rs = st.executeUpdate(query);
@@ -141,65 +137,8 @@ public class SignupPage implements ActionListener{
 			}
 
 
-			/* 
-			try 
-			{
-				new PasswordValidation(userPasswordField.getPassword());
-			} 
-			catch (LowerCaseCharacterMissing e1) 
-			{
-				messageLabel.setForeground(Color.red);
-			    messageLabel.setText("Password must have at least 1 lower-case character");
-				return;
-			}
-			catch (UpperCaseCharacterMissing e1) 
-			{
-				messageLabel.setForeground(Color.red);
-			    messageLabel.setText("Password must have at least 1 upper-case character");
-				return;
-			}
-			catch (NumberCharacterMissing e1) 
-			{
-				messageLabel.setForeground(Color.red);
-			    messageLabel.setText("Password must have at least 1 numerical character");
-				return;
-			}
-			catch (SpecialCharacterMissing e1) 
-			{
-				messageLabel.setForeground(Color.red);
-			    messageLabel.setText("Password must have at least 1 special character");
-				return;
-			}
-			catch (Minimum8CharactersMissing e1) 
-			{
-				messageLabel.setForeground(Color.red);
-			    messageLabel.setText("Password must be at least 8 characters");
-				return;
-			}
-			catch (PasswordException e1) 
-			{
-				messageLabel.setForeground(Color.red);
-			    messageLabel.setText("Something went wrong");
-				return;
-			}
-			finally
-			{
-				if(studentID.isBlank()) 
-				{
-	            	messageLabel.setForeground(Color.red);
-					messageLabel.setText("input a username");
-					return;
-	            }
-			}
-			*/
-            // All good
-        	//signup.put(studentID, password);
-        	
-		   // frame.dispose();
-	       // new LoginPage(signup, frame.getX(), frame.getY());
-            
-            //
-        }
-           
-	}	
+
+		}
+
+	}
 }

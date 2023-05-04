@@ -4,17 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import java.util.HashMap;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 
 public class WelcomePage extends JFrame implements ActionListener {
     public JFrame frame;
-    public String userID;
-    public WelcomePage(String userID) {
+    private String user_id;
 
-        this.userID=userID;
-        setTitle("Welcome Back" + userID);
+    public WelcomePage(String user_id) {
+        this.user_id = user_id;
+
+        setTitle("Welcome Page ");
         setBounds(0, 0, 400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -38,27 +40,45 @@ public class WelcomePage extends JFrame implements ActionListener {
         scheduleLabel.setForeground(Color.BLUE);
         panel.add(scheduleLabel);
 
-        String[] classTimes = {"9:00 AM - 10:30 AM", "10:45 AM - 12:15 PM", "1:00 PM - 2:30 PM", "2:45 PM - 4:15 PM", "4:30 PM - 6:00 PM"};
-        String[] classNames = {"Math 101", "English 101", "History 101", "Biology 101", "Computer Science 101"};
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
 
-        for (int i = 0; i < classTimes.length; i++) {
-            JPanel classPanel = new JPanel();
-            classPanel.setLayout(null);
-            Border border = BorderFactory.createLineBorder(Color.black);
-            classPanel.setBorder(border);
-            classPanel.setBounds(30, 90 + (i * 80), 340, 70);
-            panel.add(classPanel);
+            PreparedStatement pst = conn.prepareStatement("SELECT distinct course.course_id, name FROM course,student_course WHERE status='Incomplete' and course.course_id=student_course.course_id and student_id=?;");
+            pst.setString(1, user_id);
+            ResultSet rs = pst.executeQuery();
 
-            JLabel classTimeLabel = new JLabel(classTimes[i]);
-            classTimeLabel.setBounds(10, 10, 150, 30);
-            classPanel.add(classTimeLabel);
+            int numClasses = 0;
 
-            JLabel classNameLabel = new JLabel(classNames[i]);
-            classNameLabel.setBounds(10, 40, 150, 30);
-            classPanel.add(classNameLabel);
+            while(rs.next()) {
+                numClasses++;
+
+                JPanel classPanel = new JPanel();
+                classPanel.setLayout(null);
+                Border border = BorderFactory.createLineBorder(Color.black);
+                classPanel.setBorder(border);
+                classPanel.setBounds(30, 80 + ((numClasses-1) * 80), 340, 40);
+                panel.add(classPanel);
+
+                JLabel classNameLabel = new JLabel(rs.getString("name"));
+                classNameLabel.setBounds(10, 10, 150, 30);
+                classPanel.add(classNameLabel);
+
+                JLabel classIdLabel = new JLabel(rs.getString("course_id"));
+                classIdLabel.setBounds(300, 10, 150, 30);
+                classPanel.add(classIdLabel);
+            }
+
+            if (numClasses == 0) {
+                JLabel noClassesLabel = new JLabel("You have no classes scheduled.");
+                noClassesLabel.setBounds(30, 90, 300, 30);
+                panel.add(noClassesLabel);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
         setVisible(true);
+
     }
 
     @Override
@@ -67,30 +87,31 @@ public class WelcomePage extends JFrame implements ActionListener {
             JComboBox dropdown = (JComboBox) e.getSource();
             String selectedOption = (String) dropdown.getSelectedItem();
             if (selectedOption.equals("CourseMap")) {
-                new CourseMap(userID);
-                //courseMapFrame.setSize(500, 500);
-                //courseMapFrame.setVisible(true);
+                new CourseMap(user_id);
             }
             if (selectedOption.equals("Student Profile")) {
-                new StudentProfile(userID);
+                JFrame studentProfileFrame = new StudentProfile(user_id).frame;
+                studentProfileFrame.setVisible(true);
                 dispose();
             }
             if (selectedOption.equals("Course History")) {
-                new CourseHistory(userID);
+                JFrame courseHistoryFrame = new CourseHistory(user_id).frame;
+                courseHistoryFrame.setVisible(true);
                 dispose();
             }
             if (selectedOption.equals("Add/Drop Courses")) {
-                new AdjustCoursePage(userID);
+                JFrame AdjustCoursePageFrame = new AdjustCoursePage(user_id).frame;
+                AdjustCoursePageFrame.setVisible(true);
                 dispose();
-            } 
             }
-            if (e.getSource() instanceof JButton) 
-            {
-                JButton button = (JButton) e.getSource();
-                if(button.getText().equals("Log Out")) {
-                    dispose();
-                    new LoginPage(new HashMap<>(), this.getX(), this.getY());
-                }
+        }
+        if (e.getSource() instanceof JButton) {
+            JButton button = (JButton) e.getSource();
+            if (button.getText().equals("Log Out")) {
+                dispose();
+                new LoginPage(new HashMap<>(), this.getX(), this.getY());
             }
+        }
     }
+
 }
