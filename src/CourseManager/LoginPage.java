@@ -76,7 +76,8 @@ public class LoginPage implements ActionListener{
 			String password = String.valueOf(userPasswordField.getPassword());
 
 			try {
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+			 
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
 
 				PreparedStatement pst = con.prepareStatement("SELECT student_ID, password FROM student WHERE student_id=? and password=?");
 				pst.setString(1, userID);
@@ -84,7 +85,7 @@ public class LoginPage implements ActionListener{
 				ResultSet rs = pst.executeQuery();
 				if(rs.next()){
 					frame.dispose();
-					new WelcomePage(userID, frame.getX(), frame.getY());
+					new WelcomePage(userID);
 				}
 				else{
 					JOptionPane.showMessageDialog(signupButton, "Incorrect Credentials");

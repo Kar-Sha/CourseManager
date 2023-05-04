@@ -76,12 +76,12 @@ public class CourseHistory extends JFrame implements ActionListener {
                 welcomePageFrame.setVisible(true);
             }
             if (selectedOption.equals("Add/Drop Courses")) {
-                JFrame adjustCoursePageFrame = new AdjustCoursePage().frame;
+                JFrame adjustCoursePageFrame = new AdjustCoursePage(userID).frame;
                 adjustCoursePageFrame.setVisible(true);
                 frame.dispose();
             }
             if (selectedOption.equals("Student Profile")) {
-                JFrame studentProfileFrame = new StudentProfile().frame;
+                JFrame studentProfileFrame = new StudentProfile(userID).frame;
                 studentProfileFrame.setVisible(true);
                 frame.dispose();
             }
