@@ -20,7 +20,7 @@ public class StudentProfile extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
 
             PreparedStatement pst = conn.prepareStatement("SELECT * FROM student WHERE student_id=?");
             pst.setString(1, user_id);
@@ -128,9 +128,7 @@ public class StudentProfile extends JFrame implements ActionListener {
             String selectedOption = (String) dropdown.getSelectedItem();
 
             if (selectedOption.equals("CourseMap")) {
-                JFrame courseMapFrame = new JFrame("Course Map");
-                courseMapFrame.setSize(500, 500);
-                courseMapFrame.setVisible(true);
+                new CourseMap(user_id);
             }
             if (selectedOption.equals("Schedule")) {
                 JFrame welcomePageFrame = new WelcomePage(user_id).frame;
