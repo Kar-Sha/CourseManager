@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+
+import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.*;
 
 public class EditCourse implements ActionListener{
@@ -79,33 +81,49 @@ public class EditCourse implements ActionListener{
 			 
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
 
-				PreparedStatement pst = con.prepareStatement("SELECT course_ID FROM course WHERE name=?");
+				PreparedStatement pst = con.prepareStatement("SELECT course_id FROM course WHERE name=?");
 				pst.setString(1, className);
                 //pst.setString(2, userID);
 				ResultSet rs = pst.executeQuery();
+                //System.out.println(rs.next());
 				if(rs.next()){
                     String courseID = rs.getString(1);
-                    String status = "Complete";
-				    Statement pst2 = con.createStatement();
-                    String sql = "INSERT INTO student_course(student_id, course_id,status,grade)" +
-                    "VALUES('" + userID + "','" + courseID + "','" + status + "','"  +  grade +"')";
-				    int rs2 = pst2.executeUpdate(sql);
-                    if(rs2 == 1)
+                    PreparedStatement pest = con.prepareStatement("SELECT student_id FROM student_course WHERE course_id=?");
+                    pest.setString(1, courseID);
+                    ResultSet rsfind = pest.executeQuery();
+                    if(rsfind.next())
                     {
-				        Statement pst3 = con.createStatement();
-                        String sql2 = "UPDATE student_course SET status='Complete',grade=\"" + grade + "\" WHERE course_id=\"" + courseID + "\"";
-				        int rs3 = pst3.executeUpdate(sql2);
-                        if(rs3 == 1)
+                        if(rsfind.getString(1).equals(userID))
+                        {
+                            Statement pst3 = con.createStatement();
+                            String sql2 = "UPDATE student_course SET status='Complete',grade=\"" + grade + "\" WHERE course_id=\"" + courseID + "\"";
+				            int rs3 = pst3.executeUpdate(sql2);
+                            if(rs3 == 1)
+                            {
+                                JOptionPane.showMessageDialog(backButton, "Course Recorded");
+                                frame.dispose();
+                                con.close();
+                                new EditCourse(userID);
+                            }
+                        }
+                    }
+				else{ 
+                        String status = "Complete";
+                        Statement pst2 = con.createStatement();
+                        String sql = "INSERT INTO student_course(student_id, course_id,status,grade)" +
+                            "VALUES('" + userID + "','" + courseID + "','" + status + "','"  +  grade +"')";
+                        int rs2 = pst2.executeUpdate(sql);
+                        if(rs2 == 1)
                         {
                             JOptionPane.showMessageDialog(backButton, "Course Recorded");
                             frame.dispose();
                             con.close();
                             new EditCourse(userID);
                         }
-				    }
-				else{
-					JOptionPane.showMessageDialog(backButton, "Incorrect Query");
 				}
+            }
+            else{
+                JOptionPane.showMessageDialog(backButton, "Course Not Available");
             }
         }
 			catch (SQLException sqlException){

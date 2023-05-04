@@ -10,11 +10,13 @@ import java.util.*;
 
 public class AdjustCoursePage extends JFrame implements ActionListener {
     public JFrame frame;
-    private String user_id;
+    public String user_id;
     public JList<String> courseList;
     public JComboBox<String> dropdown;
     public WelcomePage welcomePage;
     private JTextField classTextField = new JTextField();
+    private JButton addCourseButton = new JButton("Add Course");
+    private JButton dropCourseButton = new JButton("Drop Course");
 
     AdjustCoursePage(String user_id) {
         this.user_id = user_id;
@@ -50,12 +52,10 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         courseListScrollPane.setBounds(50, 70, 300, 300);
         panel.add(courseListScrollPane);
 
-        JButton addCourseButton = new JButton("Add Course");
         addCourseButton.addActionListener(this);
         addCourseButton.setBounds(50, 475, 150, 30);
         panel.add(addCourseButton);
 
-        JButton dropCourseButton = new JButton("Drop Course");
         dropCourseButton.addActionListener(this);
         dropCourseButton.setBounds(200, 475, 150, 30);
         panel.add(dropCourseButton);
@@ -88,6 +88,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        String className = classTextField.getText();
         if (e.getSource() instanceof JComboBox) {
             JComboBox dropdown = (JComboBox) e.getSource();
             String selectedOption = (String) dropdown.getSelectedItem();
@@ -111,9 +112,60 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
                 JFrame courseHistoryFrame = new CourseHistory(user_id).frame;
                 frame.dispose();
                 courseHistoryFrame.setVisible(true);
-
             }
-
+        }
+        if(e.getSource() == addCourseButton)
+        {
+            try{
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+                PreparedStatement pst = con.prepareStatement("SELECT course_id FROM course WHERE name=?");
+				pst.setString(1, className);
+				ResultSet rs = pst.executeQuery();
+				if(rs.next()){
+                    String courseID = rs.getString(1);
+                    String status = "Active";
+                    Statement pst2 = con.createStatement();
+                    String sql = "INSERT INTO student_course(student_id, course_id,status)" +
+                            "VALUES('" + user_id + "','" + courseID + "','" + status + "')";
+                    int rs2 = pst2.executeUpdate(sql);
+                    if(rs2 == 1)
+                    {
+                        JOptionPane.showMessageDialog(addCourseButton, "Added to Schedule");
+                        frame.dispose();
+                        con.close();
+                        new AdjustCoursePage(user_id);
+                    }
+                }
+            }
+            catch (SQLException sqlException){
+				sqlException.printStackTrace();
+			}
+        }
+        if(e.getSource() == dropCourseButton)
+        {
+            try{
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
+                PreparedStatement pst = con.prepareStatement("SELECT course_id FROM course WHERE name=?");
+				pst.setString(1, className);
+				ResultSet rs = pst.executeQuery();
+				if(rs.next()){
+                    String courseID = rs.getString(1);
+                    String status = "Active";
+                    Statement pst2 = con.createStatement();
+                    String sql = "DELETE FROM student_course WHERE status='Active' and course_id=\"" + courseID + "\"";
+                    int rs2 = pst2.executeUpdate(sql);
+                    if(rs2 == 1)
+                    {
+                        JOptionPane.showMessageDialog(addCourseButton, "Deleted from Schedule");
+                        frame.dispose();
+                        con.close();
+                        new AdjustCoursePage(user_id);
+                    }
+                }
+            }
+            catch (SQLException sqlException){
+				sqlException.printStackTrace();
+			}
         }
     }
 
@@ -121,7 +173,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         String year = "";
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
             PreparedStatement pest = conn.prepareStatement("Select year_id FROM student WHERE student_id =\"" + user_id + "\"");
             ResultSet rs = pest.executeQuery();
 
@@ -144,7 +196,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         String major = "";
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
             PreparedStatement pst = conn.prepareStatement("Select major_id FROM student,major WHERE name=major AND student_id =\"" + user_id + "\"");
             ResultSet rs = pst.executeQuery();
 
@@ -166,8 +218,8 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         List<String> courses = new ArrayList<>();
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
-            PreparedStatement pst = conn.prepareStatement("SELECT course.course_id, name FROM major_course, course WHERE course.course_id = major_course.course_id AND year_id=\"" + year_id + "\"AND major_id=\"" + major_id + "\"");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
+            PreparedStatement pst = conn.prepareStatement("SELECT course.course_id, name FROM major_course, course WHERE course.course_id = major_course.course_id AND year_id=\"" + year_id + "\"AND (major_id=4 or major_id=\"" + major_id + "\")");
 
             // Get the courses for the given year_id and major_id
             ResultSet rs = pst.executeQuery();
