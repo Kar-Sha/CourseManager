@@ -60,11 +60,11 @@ In our program our classes first get the users year and major. After we get that
 ![image](https://user-images.githubusercontent.com/83847310/236344025-b9e54482-d4f9-4686-9568-a64385c2c60f.png)
 5.Course History <br />
 ![image](https://user-images.githubusercontent.com/83847310/236343651-c7e16b04-9ff2-45d8-8aec-d33c9b9ba1e0.png)
-6.Course Map <br />
+6.Course Map
 ![image](https://user-images.githubusercontent.com/83847310/236343760-f4579e50-bbd8-4dc2-a5e6-ae4534ee43bd.png)
-7. Add/Drop Page <br/ >
+7. Add/Drop Page 
 8. ![image](https://user-images.githubusercontent.com/83847310/236343938-7c9e4cc1-92fc-45d6-b086-bf59b434cd7e.png)
-9. Edit Course <br / >
+9. Edit Course 
 ![image](https://user-images.githubusercontent.com/83847310/236343853-37220646-d22c-4264-ad8a-8abd6f00f693.png)
 
 
