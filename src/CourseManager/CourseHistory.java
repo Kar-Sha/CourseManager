@@ -82,7 +82,7 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Freshman"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=1 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
@@ -117,7 +117,7 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Sophomore"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=2 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
@@ -152,7 +152,7 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Junior"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=3 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();
@@ -187,7 +187,7 @@ public class CourseHistory extends JFrame implements ActionListener {
                 case("Senior"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT major_course.course_id,name,grade FROM course, student_course, major_course WHERE year_id=4 AND major_course.course_id = student_course.course_id AND course.course_id = student_course.course_id AND status = 'Complete' AND student_id =\"" + userID + "\"",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
                         rs.last();

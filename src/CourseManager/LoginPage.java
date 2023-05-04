@@ -18,7 +18,7 @@ public class LoginPage implements ActionListener{
 	private JButton signupButton = new JButton("Sign Up");
 	private JTextField userIDField = new JTextField();
 	private JPasswordField userPasswordField = new JPasswordField();
-	private JLabel userIDLabel = new JLabel("userID:");
+	private JLabel userIDLabel = new JLabel("Student ID:");
 	private JLabel userPasswordLabel = new JLabel("password:");
 	private JLabel messageLabel = new JLabel();
 	private HashMap<String,String> logininfo = new HashMap<String,String>();
@@ -76,7 +76,7 @@ public class LoginPage implements ActionListener{
 			String password = String.valueOf(userPasswordField.getPassword());
 
 			try {
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
 
 				PreparedStatement pst = con.prepareStatement("SELECT student_ID, password FROM student WHERE student_id=? and password=?");
 				pst.setString(1, userID);

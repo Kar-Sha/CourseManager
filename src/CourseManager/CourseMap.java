@@ -51,16 +51,19 @@ public class CourseMap extends JFrame implements ActionListener{
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JComboBox) {
+    public void actionPerformed(ActionEvent e) 
+    {
+        if (e.getSource() instanceof JComboBox) 
+        {
             JComboBox dropdown = (JComboBox) e.getSource();
             String select = (String) dropdown.getSelectedItem();
             switch(select)
             {
                 case("Freshman"):
                 {
-                    try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                    try 
+                    {
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=1 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)"
                                 + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
@@ -101,7 +104,7 @@ public class CourseMap extends JFrame implements ActionListener{
                 case("Sophomore"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=2 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)"
                                 + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
@@ -131,8 +134,6 @@ public class CourseMap extends JFrame implements ActionListener{
                         f.getContentPane().add(p);
                         f.validate();
                         //f.add(jsp);
-
-
                     }
                     catch (SQLException sqlException){
                         sqlException.printStackTrace();
@@ -142,7 +143,7 @@ public class CourseMap extends JFrame implements ActionListener{
                 case("Junior"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=3 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)"
                                 + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
@@ -182,7 +183,7 @@ public class CourseMap extends JFrame implements ActionListener{
                 case("Senior"):
                 {
                     try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                         PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=4 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)"
                                 + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = pst.executeQuery();
@@ -225,143 +226,16 @@ public class CourseMap extends JFrame implements ActionListener{
                     new EditCourse(userID);
                     f.dispose();
                 }
-            }
-        }
-    }
-}                   catch (SQLException sqlException){
-                        sqlException.printStackTrace();
-                    }
-                    break;
-                }
-                case("Sophomore"):
-                {
-                    try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=2 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
-                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                        ResultSet rs = pst.executeQuery();
-                        rs.last();
-                        int rows = rs.getRow();
-                        rs.beforeFirst();
-                        data = new Object[rows][column.length];
-                        for(int i=0;i<rows;i++)
-                        {
-                            rs.next();
-                            for(int j=0;j<column.length;j++)
-                            {
-                                data[i][j] = rs.getString(j+1);
-                            }
-                        }
-                        JPanel p = new JPanel();
-                        p.setLayout(new BorderLayout());
     
-    
-                        table = new JTable(data, column);
-                        JScrollPane jsp = new JScrollPane(table);
-                        jsp.setViewportView(table);
-                        jsp.setBounds(50,50,100,100);
-                        p.add(jsp,BorderLayout.NORTH);
-                        p.setLocation(50,150);
-                        p.setSize(300, 300);
-                        f.getContentPane().add(p);
-                        f.validate();
-                        //f.add(jsp);
-                        
-            
-                    }
-                    catch (SQLException sqlException){
-                        sqlException.printStackTrace();
-                    }
-                    break;
-                }
-                case("Junior"):
-                {
-                    try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=3 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
-                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                        ResultSet rs = pst.executeQuery();
-                        rs.last();
-                        int rows = rs.getRow();
-                        rs.beforeFirst();
-                        data = new Object[rows][column.length];
-                        for(int i=0;i<rows;i++)
-                        {
-                            rs.next();
-                            for(int j=0;j<column.length;j++)
-                            {
-                                data[i][j] = rs.getString(j+1);
-                            }
-                        }
-                        JPanel p = new JPanel();
-                        p.setLayout(new BorderLayout());
-    
-    
-                        table = new JTable(data, column);
-                        JScrollPane jsp = new JScrollPane(table);
-                        jsp.setViewportView(table);
-                        jsp.setBounds(50,50,100,100);
-                        p.add(jsp,BorderLayout.NORTH);
-                        p.setLocation(50,150);
-                        p.setSize(300, 300);
-                        f.getContentPane().add(p);
-                        f.validate();
-                        //f.add(jsp);
-                        
-                    }
-                    catch (SQLException sqlException){
-                        sqlException.printStackTrace();
-                    }
-                    break;
-                }
-                case("Senior"):
-                {
-                    try {
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-                        PreparedStatement pst = con.prepareStatement("SELECT course.course_id,name FROM course, major_course WHERE major_course.year_id=4 AND course.course_id=major_course.course_id AND (major_course.major_id=1 or major_course.major_id=4)" 
-                        + " and course.course_id NOT IN(SELECT DISTINCT course_id FROM student_course WHERE (status='Incomplete' or status='Complete') and student_id=\"" + userID + "\") ORDER BY rand() LIMIT 8",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                        ResultSet rs = pst.executeQuery();
-                        rs.last();
-                        int rows = rs.getRow();
-                        rs.beforeFirst();
-                        data = new Object[rows][column.length];
-                        for(int i=0;i<rows;i++)
-                        {
-                            rs.next();
-                            for(int j=0;j<column.length;j++)
-                            {
-                                data[i][j] = rs.getString(j+1);
-                            }
-                        }
-                        JPanel p = new JPanel();
-                        p.setLayout(new BorderLayout());
-    
-    
-                        table = new JTable(data, column);
-                        JScrollPane jsp = new JScrollPane(table);
-                        jsp.setViewportView(table);
-                        jsp.setBounds(50,50,100,100);
-                        p.add(jsp,BorderLayout.NORTH);
-                        p.setLocation(50,150);
-                        p.setSize(300, 300);
-                        f.getContentPane().add(p);
-                        f.validate();
-                        //f.add(jsp);
-                        
-            
-                    }
-                    catch (SQLException sqlException){
-                        sqlException.printStackTrace();
-                    }
-                    break;
-                }
-                case("Insert Grade"):
-                {
-                    new EditCourse(userID);
-                    f.dispose();
-                }
             }
         }
     }
 }
+
+
+
+        
+
+    
+
 

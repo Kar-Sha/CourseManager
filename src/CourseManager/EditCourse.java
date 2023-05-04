@@ -77,7 +77,7 @@ public class EditCourse implements ActionListener{
 
 			try {
 
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
 
 				PreparedStatement pst = con.prepareStatement("SELECT course_id FROM course WHERE name=?");
 				pst.setString(1, className);

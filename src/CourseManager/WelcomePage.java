@@ -41,7 +41,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         panel.add(scheduleLabel);
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
 
             PreparedStatement pst = conn.prepareStatement("SELECT distinct course.course_id, name FROM course,student_course WHERE status='Incomplete' and course.course_id=student_course.course_id and student_id=?;");
             pst.setString(1, user_id);

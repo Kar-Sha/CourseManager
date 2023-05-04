@@ -121,7 +121,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         if(e.getSource() == addCourseButton)
         {
             try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                 PreparedStatement pst = con.prepareStatement("SELECT course_id FROM course WHERE name=?");
                 pst.setString(1, className);
                 ResultSet rs = pst.executeQuery();
@@ -147,7 +147,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         if(e.getSource() == dropCourseButton)
         {
             try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                 PreparedStatement pst = con.prepareStatement("SELECT course_id FROM course WHERE name=?");
                 pst.setString(1, className);
                 ResultSet rs = pst.executeQuery();
@@ -181,7 +181,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         String year = "";
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
             PreparedStatement pest = conn.prepareStatement("Select year_id FROM student WHERE student_id =\"" + user_id + "\"");
             ResultSet rs = pest.executeQuery();
 
@@ -204,7 +204,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         String major = "";
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
             PreparedStatement pst = conn.prepareStatement("Select major_id FROM student,major WHERE name=major AND student_id =\"" + user_id + "\"");
             ResultSet rs = pst.executeQuery();
 
@@ -226,7 +226,7 @@ public class AdjustCoursePage extends JFrame implements ActionListener {
         List<String> courses = new ArrayList<>();
         try {
             // Connect to the database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass");
             PreparedStatement pst = conn.prepareStatement("SELECT course.course_id, name FROM major_course, course WHERE course.course_id = major_course.course_id AND year_id=\"" + year_id + "\"AND (major_id=4 or major_id=\"" + major_id + "\")");
 
             // Get the courses for the given year_id and major_id

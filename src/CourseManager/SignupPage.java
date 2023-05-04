@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+
+
 
 public class SignupPage implements ActionListener{
 	//setting up the form
@@ -114,7 +117,7 @@ public class SignupPage implements ActionListener{
 			String year = yearField.getText(); //only put in 1 or 2 or 3 or 4
 
 			try {
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "Bellators@612"); //change
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
 
 				String query = "INSERT INTO student(student_id, first_name, last_name, email, password, major, year_id)" +
 						"VALUES('" + studentID + "','" + firstName + "','" + lastName + "','"  + email + "','" + password + "','" + major + "','" + year + "')";
