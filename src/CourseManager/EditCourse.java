@@ -84,29 +84,19 @@ public class EditCourse implements ActionListener{
                 //pst.setString(2, userID);
 				ResultSet rs = pst.executeQuery();
 				if(rs.next()){
-                    System.out.println("FIRST ONE");
                     String courseID = rs.getString(1);
-                    //Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
                     String status = "Complete";
-                    System.out.println("BEFORE QUERY");
 				    Statement pst2 = con.createStatement();
                     String sql = "INSERT INTO student_course(student_id, course_id,status,grade)" +
                     "VALUES('" + userID + "','" + courseID + "','" + status + "','"  +  grade +"')";
 				    int rs2 = pst2.executeUpdate(sql);
-                    System.out.println("AFTER QUERY");
                     if(rs2 == 1)
                     {
-                        System.out.println("SECOND");
-                        //Connection con3 = DriverManager.getConnection("jdbc:mysql://localhost:3306/course_manager", "root", "MySQLr00tpass"); //change
-
-                        System.out.println("BEFORE 2ND QUERY");
 				        Statement pst3 = con.createStatement();
                         String sql2 = "UPDATE student_course SET status='Complete',grade=\"" + grade + "\" WHERE course_id=\"" + courseID + "\"";
 				        int rs3 = pst3.executeUpdate(sql2);
-                        System.out.println("AFTER 2ND QUERY");
                         if(rs3 == 1)
                         {
-                            System.out.println("FINALLY");
                             JOptionPane.showMessageDialog(backButton, "Course Recorded");
                             frame.dispose();
                             con.close();
