@@ -50,7 +50,21 @@ In our program our classes first get the users year and major. After we get that
 7. Test the Connection with "DBConnection.loadConnection();", a popup window will be shown if the connection was successful. This pass needs to be changed in every Connection con we ran in the project. 
 
 ### Snapshots of Running Program
+1.Login Page <br />
 ![image](https://user-images.githubusercontent.com/83847310/236339672-1f5d823b-7858-4d55-ab55-d39f825842e0.png)
+2.Sign Up Page <br />
+![image](https://user-images.githubusercontent.com/83847310/236342486-e4eebd98-5a6c-4502-852c-c1f4c03fb68a.png)
+3.Welcome Page <br />
+![image](https://user-images.githubusercontent.com/83847310/236342617-ff8b789d-10b7-42c3-b2be-ea2c96385b81.png)
+4.Student Profile <br />
+![image](https://user-images.githubusercontent.com/83847310/236342723-3c369688-3bd3-4d4f-8254-a3ca85738b51.png)
+5.Course History <br />
+
+6.Course Map <br />
+
+7. Add/Drop Page <br/ >
+
+
 
 
 ## References
